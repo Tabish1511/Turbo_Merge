@@ -1,1 +1,1 @@
-web: gunicorn turbo_merge.wsgi --logfile -
+web: gunicorn turbo_merge.wsgi
