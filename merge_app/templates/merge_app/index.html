@@ -1,0 +1,64 @@
+{% extends "merge_app/base.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload PDF</title>
+    <link rel="stylesheet" href="{% static 'merge_app/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'merge_app/styles2.css' %}">
+</head>
+
+<body>
+    
+    <form method="post" action="{% url 'merge_app:index' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="uploads"  id="upload" multiple> <!--'name' should be the same as request.FILES.getlist('uploads')-->
+        <br>
+        <button type="submit">Upload</button>
+    </form>
+
+    <ul id="sortable-list">
+        {% for upload in uploads %}
+        <li draggable="true">
+            <div class="sortable-item">{{ upload }}</div>
+            <div class="sortable-integer">
+                <p>Select pages to skip below</p>
+                <select name="custom_integer" id="custom-integer-{{ upload.id }}">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+            </div>
+            <form method="post" action="{% url 'merge_app:del_upload' upload.id %}">
+                {% csrf_token %}
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <form id="submit" action="{% url 'merge_app:merge_pdf' %}" method="post">
+        <input type="hidden" name="selectedValues" id="selectedValuesField" value=''>
+        <input type="hidden" name="itemNames" id="itemNamesField" value=''>
+        {% csrf_token %}
+        <button type="submit" id="submit-button">Merge your PDFs</button>
+    </form>
+    
+    <script src="{% static 'merge_app/script.js' %}"></script>
+
+</body>
+</html>
+
+
+{% endblock content %}
