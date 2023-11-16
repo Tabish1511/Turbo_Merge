@@ -28,7 +28,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['turbomerge-production.up.railway.app', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['https://turbomerge-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://turbomerge-production.up.railway.app']
+
+CORS_ALLOWED_ORIGINS = [
+    "https://turbomerge-production.up.railway.app",
+]
 
 
 # Application definition
@@ -36,6 +40,7 @@ CSRF_TRUSTED_ORIGINS = ['https://turbomerge-production.up.railway.app/']
 INSTALLED_APPS = [
     'merge_app',
     'users',
+    'corsheaders',
 
 
     'django.contrib.admin',
@@ -51,6 +56,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
