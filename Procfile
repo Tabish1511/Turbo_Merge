@@ -1,1 +1,1 @@
-web: gunicorn turbo_merge.wsgi
+web: gunicorn turbo_merge.wsgi --access-logfile - --error-logfile -
