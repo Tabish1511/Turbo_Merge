@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['turbomerge-production.up.railway.app', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['https://turbomerge-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://turbomerge-production.up.railway.app/']
 
 
 # Application definition
